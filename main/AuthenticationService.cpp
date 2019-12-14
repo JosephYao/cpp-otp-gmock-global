@@ -13,8 +13,7 @@ bool AuthenticationService::isValid(const std::string userName, const std::strin
     auto passwordFromDao = profileDao.getPassword(userName);
 
     // 根據 account 取得 RSA token 目前的亂數
-    RsaTokenDao rsaToken;
-    auto randomCode = rsaToken.getRandom(userName);
+    auto randomCode = createRsaTokenDao()->getRandom(userName);
 
     // 驗證傳入的 password 是否等於自訂密碼 + RSA token亂數
     auto validPassword = passwordFromDao + randomCode;
@@ -25,4 +24,8 @@ bool AuthenticationService::isValid(const std::string userName, const std::strin
     } else {
         return false;
     }
+}
+
+std::unique_ptr<RsaTokenDao> createRsaTokenDao() {
+    return std::make_unique<RsaTokenDao>();
 }

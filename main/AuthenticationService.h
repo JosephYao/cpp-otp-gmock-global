@@ -2,6 +2,10 @@
 #define CPP_OTP_AUTHENTICATIONSERVICE_H
 
 #include <string>
+#include "RsaTokenDao.h"
+#include <memory>
+
+std::unique_ptr<RsaTokenDao> createRsaTokenDao();
 
 class AuthenticationService {
 
