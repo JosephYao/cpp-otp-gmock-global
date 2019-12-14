@@ -26,6 +26,3 @@ bool AuthenticationService::isValid(const std::string userName, const std::strin
     }
 }
 
-std::unique_ptr<RsaTokenDao> createRsaTokenDao() {
-    return std::make_unique<RsaTokenDao>();
-}

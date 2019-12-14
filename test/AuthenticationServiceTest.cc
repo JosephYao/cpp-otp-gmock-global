@@ -17,7 +17,7 @@ namespace {
         AuthenticationService target;
         auto stubRsaTokenDaoPtr = stubRsaTokenDao.get();
 
-        ON_CALL(*stubRsaTokenDaoPtr, getRandom("joey")).WillByDefault(Return("aaa"));
+        ON_CALL(*stubRsaTokenDaoPtr, getRandom(_)).WillByDefault(Return("000000"));
 
         bool actual = target.isValid("joey", "91000000");
 

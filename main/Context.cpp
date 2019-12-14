@@ -3,13 +3,10 @@
 
 std::map<std::string, std::string> Context::profiles;
 
-Context::Context() {
+std::string Context::getPassword(const std::string userName) {
     profiles = {
             {"joey", "91"},
             {"mei",  "99"}
     };
-}
-
-std::string Context::getPassword(const std::string userName) {
     return profiles[userName];
 }
