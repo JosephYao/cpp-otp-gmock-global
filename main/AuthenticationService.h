@@ -5,12 +5,20 @@
 #include "RsaTokenDao.h"
 #include <memory>
 
-std::unique_ptr<RsaTokenDao> createRsaTokenDao();
 
 class AuthenticationService {
 
 public:
     bool isValid(const std::string userName, const std::string password);
+};
+
+class AuthenticationServiceFactory {
+
+public:
+    static std::unique_ptr<RsaTokenDao> createRsaTokenDao();
+
+    static void setRsaTokenDao(std::unique_ptr<RsaTokenDao> rsaTokenDao);
+
 };
 
 

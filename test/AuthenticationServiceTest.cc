@@ -5,17 +5,13 @@
 
 using namespace ::testing;
 
-std::unique_ptr<StubRsaTokenDao> stubRsaTokenDao = std::make_unique<StubRsaTokenDao>();;
-
-std::unique_ptr<RsaTokenDao> createRsaTokenDao(){
-    return std::move(stubRsaTokenDao);
-}
-
 namespace {
 
     TEST(AuthenticationService, IsValid) {
         AuthenticationService target;
+        auto stubRsaTokenDao = std::make_unique<StubRsaTokenDao>();;
         auto stubRsaTokenDaoPtr = stubRsaTokenDao.get();
+        AuthenticationServiceFactory::setRsaTokenDao(std::move(stubRsaTokenDao));
 
         ON_CALL(*stubRsaTokenDaoPtr, getRandom(_)).WillByDefault(Return("000000"));
 
